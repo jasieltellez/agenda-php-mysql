@@ -17,12 +17,16 @@ else {
   $i=0;
       while ($fila = $resultado_consulta->fetch_assoc()) {
         $response['eventos'][$i]['id']=$fila['id'];
-        $response['eventos'][$i]['titulo']=$fila['titulo'];
-        $response['eventos'][$i]['start']=$fila['start_date'];
-        $response['eventos'][$i]['tstart']=$fila['start_hour'];
-        $response['eventos'][$i]['tend']=$fila['end_hour'];
-        $response['eventos'][$i]['end']=$fila['end_date'];
-        $response['eventos'][$i]['allDay']=$fila['allDay'];
+        $response['eventos'][$i]['title']=$fila['titulo'];
+        $response['eventos'][$i]['start']=$fila['start_date']."T".$fila['start_hour'];
+        $response['eventos'][$i]['end']=$fila['end_date']."T".$fila['end_hour'];
+        if ($fila['allDay']=='1') {
+            $response['eventos'][$i]['allDay']=true;
+        }
+        else {
+            $response['eventos'][$i]['allDay']=false;
+        }
+
 
         $i++;
       }

@@ -13,7 +13,13 @@ else {
   $data['`start_hour`']="'".$_POST['start_hour']."'";
   $data['`end_hour`']="'".$_POST['end_hour']."'";
   $data['`end_date`']="'".$_POST['end_date']."'";
-  $data['`allDay`']="'".$_POST['allDay']."'";
+  if($_POST['allDay']=='true'){
+      $data['`allDay`']="'1'";
+  }
+  else {
+      $data['`allDay`']="'0'";
+  }
+
   $data['`email`']="'".$_SESSION['email']."'";
 
 

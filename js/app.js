@@ -39,7 +39,7 @@ class EventsManager {
         		center: 'title',
         		right: 'month,agendaWeek,basicDay'
         	},
-        	defaultDate: '2016-11-01',
+        	defaultDate: '2017-09-01',
         	navLinks: true,
         	editable: true,
         	eventLimit: true,
@@ -100,13 +100,13 @@ class EventsManager {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val(),
-                allDay: 1
+                allDay: true
               })
             }else {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val()+" "+$('#start_hour').val(),
-                allDay: 0,
+                allDay: false,
                 end: $('#end_date').val()+" "+$('#end_hour').val()
               })
             }
@@ -130,7 +130,7 @@ class EventsManager {
       var form_data = new FormData()
       form_data.append('id', event.id)
       $.ajax({
-        url: '../server/delete_event.php',
+        url: 'server/delete_event.php',
         dataType: "json",
         cache: false,
         processData: false,
@@ -144,7 +144,7 @@ class EventsManager {
             alert(data.msg)
           }
         },
-        error: function(){
+        error: function(ev){
           alert("error en la comunicación con el servidor");
         }
       })
@@ -175,7 +175,7 @@ class EventsManager {
         form_data.append('end_hour', end_hour)
 
         $.ajax({
-          url: '../server/update_event.php',
+          url: 'server/update_event.php',
           dataType: "json",
           cache: false,
           processData: false,
@@ -190,7 +190,7 @@ class EventsManager {
             }
           },
           error: function(){
-            alert("error en la comunicación con el servidor");
+          alert("error en la comunicación con el servidor");
           }
         })
     }
