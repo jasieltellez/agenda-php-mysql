@@ -8,7 +8,7 @@ class EventsManager {
 
 
     obtenerDataInicial() {
-        let url = '../server/getEvents.php'
+        let url = 'server/getEvents.php'
         $.ajax({
           url: url,
           dataType: "json",
@@ -24,8 +24,9 @@ class EventsManager {
               window.location.href = 'index.html';
             }
           },
-          error: function(){
-            alert("error en la comunicación con el servidor");
+          error: function(ev){
+            var a =ev;
+            alert(a.responseText);
           }
         })
 
@@ -85,7 +86,7 @@ class EventsManager {
         form_data.append('start_hour', "")
       }
       $.ajax({
-        url: '../server/new_event.php',
+        url: 'server/new_event.php',
         dataType: "json",
         cache: false,
         processData: false,
@@ -99,13 +100,13 @@ class EventsManager {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val(),
-                allDay: true
+                allDay: 1
               })
             }else {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val()+" "+$('#start_hour').val(),
-                allDay: false,
+                allDay: 0,
                 end: $('#end_date').val()+" "+$('#end_hour').val()
               })
             }
@@ -117,8 +118,8 @@ class EventsManager {
             alert(data.msg)
           }
         },
-        error: function(){
-          alert("error en la comunicación con el servidor");
+        error: function(ev){
+          alert(ev.responseText);
         }
       })
 

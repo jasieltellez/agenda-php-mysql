@@ -17,6 +17,8 @@ else {
           $fila = $resultado_consulta->fetch_assoc();
           if (password_verify($_POST['password'], $fila['password'])) {
             $response['msg'] = 'OK';
+            session_start();
+            $_SESSION['email']=$_POST['username'];
 
           }else {
               $response['msg'] = 'Clave incorrecta';
@@ -26,7 +28,7 @@ else {
 
         }
 }
-
+$conexion->cerrarConexion();
 echo json_encode($response);
 
  ?>
